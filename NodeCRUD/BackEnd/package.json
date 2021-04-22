@@ -1,0 +1,17 @@
+{
+  "name": "nodejs-crud-app",
+  "version": "1.0.0",
+  "description": "CA2 - Interactive Web Applications",
+  "main": "server.js",
+  "scripts": {
+    "prod": "node server",
+    "watch": "nodemon server --ignore public/",
+    "start": "npm run watch"
+  },
+  "author": "Valentina Quiroga",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "nodemon": "^2.0.7"
+  }
+}
