@@ -2,10 +2,12 @@
 const express = require('express'); // import express
 const app = express(); // initialize app with express
 
-//create a base route with a response
-app.get('/', (req, res) => {
-    res.send('Server running');
-});
+//import our routes
+const routes = require('./Routes/PostsRoutes');
+
+//middleware to use our routes
+app.use('/', routes);
 
 //export the app
 module.exports = app;
+
