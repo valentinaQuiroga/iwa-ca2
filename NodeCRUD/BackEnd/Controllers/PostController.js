@@ -34,3 +34,23 @@ exports.createPost = async (req, res) => {
         }
     });
 };
+
+//function to get a single post
+exports.getSinglePost = async (req, res) => {
+    //get the id from url by using req.params
+    let postID = req.params.id;
+    //we use mongoDB's findById() functionality here
+    await Posts.findById({ _id: postID}, (err, data) => {
+        if(err) {
+            res.status(500).json({
+                message: "Error in getting specific item",
+            });
+        } else {
+            console.log(data);
+            res.status(200).json({
+                message: "Item found",
+                data
+            });
+        }
+    });
+}
