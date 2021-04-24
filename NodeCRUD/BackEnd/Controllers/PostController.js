@@ -53,4 +53,45 @@ exports.getSinglePost = async (req, res) => {
             });
         }
     });
+};
+
+//function to update a single item
+exports.updatePost = async (req, res) => {
+    //get a item ID
+    let postID = req.params.id;
+
+    //I will use findByIdAndUpdate function
+    await Posts.findByIdAndUpdate({_id: postID}, {$set : req.body}, (err, data) => {
+        if (err) {
+            res.status(500).json({
+                message: "No such item was updated",
+            });
+        } else {
+            console.log("Item ID: " + postID + " Updated Successfully");
+            res.status(200).json({
+                message: "Item updated",
+                data,
+            });
+        }
+    })
 }
+
+//function to delete a post from the DB
+exports.deletePost = async (req, res) => {
+    let postID = req.params.id;
+    //i use MongoDB's deleteOne() functionality
+    await Posts.deleteOne({_id: postID}, (err, data) => {
+        if(err) {
+            res.status(500).json({
+                message: "Item not deleted",
+            });
+        } else {
+            console.log("Item deleted");
+            res.status(200).json({
+                message: "Item deleted"
+            });
+        }
+    });
+};
+
+

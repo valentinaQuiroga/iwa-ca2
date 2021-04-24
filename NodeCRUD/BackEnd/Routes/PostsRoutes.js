@@ -17,5 +17,11 @@ router.post('/create', postController.createPost);
 //read one
 router.get('/getPosts/:id', postController.getSinglePost);
 
+//update
+router.put('/getPosts/:id/update', postController.updatePost);
+
+//delete
+router.delete('/delete/:id', postController.deletePost);
+
 //export the app
 module.exports = router;
