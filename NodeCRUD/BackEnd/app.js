@@ -2,6 +2,10 @@
 const express = require('express'); // import express
 const app = express(); // initialize app with express
 
+var bodyParser = require('body-parser');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 //import our routes
 const routes = require('./Routes/PostsRoutes');
 

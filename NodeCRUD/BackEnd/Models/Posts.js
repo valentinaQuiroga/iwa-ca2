@@ -4,14 +4,24 @@ mongoose.Promise = global.Promise; // Tell mongoose to use ES6 promises
 
 //create posts schema
 const PostsSchema = new mongoose.Schema({
-    title: {
+    id:{
+        type: String,
+        unique: true
+    },
+    artType: {
+        type: String
+    },
+    article: {
         type: String
     },
     author: {
         type: String
     },
-    desc: {
-        type: String
+    price: {
+        type: Number
+    },
+    onSale: {
+        type: Boolean
     }
 });
 
