@@ -1,3 +1,12 @@
+/***************************************************************************************
+*    Title: <CRUD app using Node.JS, Express & MongoDB>
+*    Author: <Mayur Nalwala>
+*    Date: <22/09/2020>
+*    Code version: <1>
+*    Availability: <https://medium.com/@nmayurashok/crud-app-using-node-js-express-mongodb-part-2-564839cbf8c4>
+*
+***************************************************************************************/
+
 // Project configurations
 const express = require('express'); // import express
 const app = express(); // initialize app with express
