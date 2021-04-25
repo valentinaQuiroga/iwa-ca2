@@ -61,7 +61,7 @@ exports.updatePost = async (req, res) => {
     let postID = req.params.id;
 
     //I will use findByIdAndUpdate function
-    await Posts.findByIdAndUpdate({_id: postID}, {$set : req.body}, (err, data) => {
+    await Posts.findByIdAndUpdate({_id: postID}, {$set : req.body}, {returnOriginal: false}, (err, data) => {
         if (err) {
             res.status(500).json({
                 message: "No such item was updated",

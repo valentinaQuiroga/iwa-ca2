@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Art Gallery</title>
+  </head>
+  <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <form id="form">
+                    <div class="mb-3">
+                        <label for="posts" class="form-label">Posts</label>
+                        <input type="text" class="form-control" id="postUserInput" placeholder="Posts">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </form>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+          <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8">
+                <ul class="list-group" id="display">
+                  
+                </ul>
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script>
+        $(document).ready(()=>{
+            const display = $("#display");
+            const form = $("#form");
+            const postUserInput = $("#postUserInput");
+
+            const getTodos = ()=>{
+                fetch('https://tan-moose-lmdplaez.ws-eu03.gitpod.io/getPosts', {method: "GET"}).then((response)=>{
+                    return response.json();
+                }).then((data)=>{
+                    console.log(data);
+                    displayItems(data);
+                });
+            }
+
+            getTodos();
+
+            const resetPostsInput = () =>{
+                postUserInput.val('');
+            }
+
+            const buildIDS = (posts) =>{
+                return {
+                    editID : "edit_" + posts._id,
+                    deleteID : "delete_" + posts._id,
+                    listItemId : "listItem_" + post._id,
+                    postID : "posts_" + posts._id
+                }
+            }
+
+            const buildTemplate = (posts, ids)=>{
+                return `<li class="list-group-item" id"${ids.listItemId}">
+                            <div class="row">
+                                <div class="col-md-4" id="${ids.postID}">${posts.posts}</dib=v>
+                                <div class="col-md-4"></dib=v>
+                                <div class="col-md-4 text-right">
+                                    <button type="button" class="btn btn-secondary" id="${ids.editID}">Edit</button>
+                                    <button type="button" class="btn btn-danger" id="${ids.deleteID}">Delete</button>
+                                </div>
+                            </div>
+                        </li>`;
+            }
+
+            const displayItems = (data) =>{
+                data.forEach((posts) =>{
+                    let ids = buildIDS(posts);
+                    display.append(buildTemplate(posts, ids));
+                    editPosts(posts, ids.postID, ids.editID);
+                    deletePosts(posts, ids.listItemId, ids.deleteID);
+                });
+            }
+
+        });
+    </script>
+  </body>
+</html>
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Hello, world!</t
